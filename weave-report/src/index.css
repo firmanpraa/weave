@@ -1,0 +1,93 @@
+@import '@fontsource-variable/inter-tight';
+@import 'tailwindcss';
+
+/* Tokens taken from the Figma file's styles (Neutral/Solid, Base, Secondary). */
+@theme {
+  --font-sans: 'Inter Tight Variable', 'Inter Tight', ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink-900: #121926;
+  --color-ink-800: #202939;
+  --color-ink-700: #384250;
+  --color-ink-500: #697586;
+  --color-ink-400: #9aa4b2;
+  --color-ink-300: #cdd5df;
+  --color-ink-200: #e3e8ef;
+  --color-ink-100: #eef2f6;
+  --color-ink-50: #f2f5f9;
+  --color-ink-0: #f8fafb;
+  --color-base-900: #141414;
+  --color-black-soft: #010101;
+  --color-tooltip-muted: #a4acb9;
+
+  --color-forest-950: #042b1f;
+  --color-forest-900: #004737;
+  --color-mint-neon: #03ffa1;
+  --color-mint-200: #b7f8e4;
+  --color-mint-300: #77dcbc;
+  --color-mint-500: #27bb8d;
+  --color-mint-text: #40c4aa;
+  --color-sand: #f8cf80;
+  --color-cream: #fffbec;
+  --color-cream-edge: #eee8c2;
+  --color-cream-tile: #f5efd9;
+
+  --shadow-card: 0px 0px 5px 0px rgba(0, 0, 0, 0.06);
+  --shadow-control: 0px 1px 1px 0px rgba(16, 24, 40, 0.05);
+  --shadow-primary: 0px 1px 2px 0px rgba(4, 43, 31, 0.52), 0px 0px 0px 1px #004737;
+
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-white font-sans text-ink-900 antialiased;
+    font-feature-settings: 'tnum' 0;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-forest-900);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Pressable controls: instant feedback on press, colour-only hover on fine pointers. */
+  .pressable {
+    transition:
+      transform 150ms var(--ease-out-strong),
+      background-color 150ms var(--ease-out-strong),
+      border-color 150ms var(--ease-out-strong);
+  }
+  .pressable:active {
+    transform: scale(0.97);
+  }
+
+  .thin-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-ink-200) transparent;
+  }
+  .thin-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+  .thin-scroll::-webkit-scrollbar-track {
+    border: 1px solid var(--color-ink-100);
+    border-radius: 10px;
+  }
+  .thin-scroll::-webkit-scrollbar-thumb {
+    background: var(--color-ink-200);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    border-radius: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pressable,
+  .pressable:active {
+    transition: background-color 150ms ease;
+    transform: none;
+  }
+}
